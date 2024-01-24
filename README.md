@@ -1,7 +1,7 @@
-# Awesome Project Build with TypeORM
+# TODO LIST API
 
 Steps to run this project:
 
-1. Run `npm i` command
+1. Run `yarn` command
 2. Setup database settings inside `data-source.ts` file
-3. Run `npm start` command
+3. Run `yarn dev` or `yarn start` command
