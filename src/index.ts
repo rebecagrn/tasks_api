@@ -1,3 +1,4 @@
+// index.ts
 import * as express from "express";
 import * as bodyParser from "body-parser";
 import { createConnection, ConnectionOptions } from "typeorm";
@@ -19,6 +20,7 @@ async function start() {
       entities: ["src/entity/*.ts"],
     };
 
+    // Ensure createConnection is called before using repositories
     await createConnection(connectionOptions);
 
     app.use(bodyParser.json());
