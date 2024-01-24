@@ -40,11 +40,10 @@ export class TaskController {
   }
 
   async updateTask(request: Request, response: Response, next: NextFunction) {
-    const { id } = request.params;
+    const id = parseInt(request.params.id);
     const updatedFields = request.body;
 
     try {
-      // Update the task
       const updateResult = await getRepository(Tasks).update(id, updatedFields);
 
       if (updateResult.affected === 1) {
