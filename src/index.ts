@@ -2,6 +2,7 @@
 import * as express from "express";
 import * as bodyParser from "body-parser";
 import { createConnection, ConnectionOptions } from "typeorm";
+import * as cors from "cors";
 import routes from "./routes";
 
 const app = express();
@@ -23,6 +24,7 @@ async function start() {
     // Ensure createConnection is called before using repositories
     await createConnection(connectionOptions);
 
+    app.use(cors());
     app.use(bodyParser.json());
     app.use(routes);
 
