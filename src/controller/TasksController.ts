@@ -47,18 +47,32 @@ export class TaskController {
       const updateResult = await getRepository(Tasks).update(id, updatedFields);
 
       if (updateResult.affected === 1) {
-        const updatedTask = await getRepository(Tasks).findOne(id);
-
-        if (updatedTask) {
-          return response.status(200).json(updatedTask);
-        } else {
-          return response.status(404).json({ message: "Task not found" });
-        }
+        const updatedTask = await getRepository(Tasks).findOne({
+          where: { id },
+        });
+        return response.json(updatedTask);
       }
       return response.status(404).json({ message: "Task not found" });
     } catch (error) {
-      next(error);
+      console.error("Error updating task:", error);
+      response.status(500).json({ message: "Internal Server Error" });
     }
+  }
+
+  async finishTask(request: Request, response: Response, next: NextFunction) {
+    const id: number = parseInt(request.params.id, 10);
+
+    const finishResult = await getRepository(Tasks).update(id, {
+      finished: true,
+    });
+
+    if (finishResult.affected === 1) {
+      const finishedTask = await getRepository(Tasks).findOne({
+        where: { id },
+      });
+      return response.json({ message: "Task finished!" });
+    }
+    return response.status(404).json({ message: "Task not found" });
   }
 
   async remove(request: Request, response: Response, next: NextFunction) {

@@ -14,6 +14,7 @@ routes.get("/tasks", taskController.listAll.bind(taskController));
 routes.post("/tasks", taskController.save.bind(taskController));
 routes.get("/tasks/:id", taskController.one.bind(taskController));
 routes.put("/tasks/:id", taskController.updateTask.bind(taskController));
+routes.patch("/tasks/:id", taskController.finishTask.bind(taskController));
 routes.delete("/tasks/:id", taskController.remove.bind(taskController));
 
 // user
